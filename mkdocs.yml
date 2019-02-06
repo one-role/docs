@@ -1,0 +1,107 @@
+site_name: SOC Ansible documentation
+site_description: Documentation for Smart Owl Consulting
+site_author: Smart Owl Consulting
+site_url: http://ansible.prd.example.net/docs
+
+# Copyright
+copyright: 'Copyright &copy; 2018 - 2018 Smart Owl Consulting'
+
+# Repository
+repo_name: 'ansible/docs'
+repo_url: 'https://git.example.net/ansible/docs'
+
+# Address for the internal webserver
+dev_addr: 0.0.0.0:8000
+
+theme:
+  name: 'material'
+  language: 'en'
+  palette:
+    primary: 'indigo'
+    accent: 'indigo'
+  font:
+    text: 'Roboto'
+    code: 'Roboto Mono'
+
+# Customization
+extra:
+  social:
+    - type: book
+      link: http://ansible.prd.example.net/docs/
+    - type: home
+      link: http://smartowl.nl
+
+markdown_extensions:
+  - admonition
+  - smarty
+  - sane_lists
+  - attr_list
+  - codehilite:
+      linenums: False
+  - toc:
+      permalink: True
+      separator: "_"
+  - pymdownx.caret
+  - pymdownx.critic
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_generator: !!python/name:pymdownx.emoji.to_svg
+  - pymdownx.escapeall:
+      hardbreak: true
+      nbsp: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.magiclink
+  - pymdownx.mark
+  - pymdownx.progressbar
+  - pymdownx.smartsymbols
+  - pymdownx.superfences
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
+nav:
+  - Home                                : 'index.md'
+  - One role to rule them all           :
+      - 'System Installation'           : 'setup/centos7.md'
+      - 'Ansible Installation'          : 'setup/ansible.md'
+      - 'Ansible Setup'                 : 'setup/setup.md'
+      - 'ARA Run Analyser'              : 'setup/ara.md'
+      - 'Ansible Mitogen'               : 'setup/mitogen.md'
+      - 'Directory Structure'           : 'setup/dirstruct.md'
+      - 'Inventory Setup'               : 'setup/inventory.md'
+      - 'Playbooks'                     : 'setup/playbook.md'
+      - 'Environments'                  : 'setup/environments.md'
+      - 'Repositories'                  : 'setup/repos.md'
+  - Documentation                       : 'mkdocs.md'
+  - Development                         :
+      - 'Coding Style'                  : 'devel/codingstyle.md'
+      - 'Keep things safe'              : 'devel/vault.md'
+      - 'Workflow'                      : 'devel/workflow.md'
+      - 'Setup on Red Hat'              : 'devel/setup_redhat.md'
+      - 'Setup on Ubuntu'               : 'devel/setup_ubuntu.md'
+      - 'Local development with Vagrant': 'devel/vagrant.md'
+      - 'Playing on the controle node'  : 'devel/running.md'
+      - 'Using the proxy in playbooks'  : 'devel/proxy.md'
+      - 'Deployment'                    : 'devel/deployment.md'
+      - 'Command overview'              : 'devel/commands.md'
+      - Editors                         :
+          - 'Atom Editor'               : 'devel/editors/atomeditor.md'
+          - 'VSCode Editor'             : 'devel/editors/vscode.md'
+  - System Managed?                     : 'managed.md'
+  - Software sources                    : 'software_sources.md'
+  - Logging                             : 'logging.md'
+  - TODO list                           : 'todo.md'
+  - Galaxy roles                        : 'galaxy.md'
+  - Tips and Tricks                     : 'tips_tricks.md'
+  - Roles:
+    - 'rocketchat': 'rocketchat.md'
+    # _ROLES_START_ Do not remove this line
+    - 'apache': 'roles/apache.md'
+    - 'authconfig': 'roles/authconfig.md'
+    - 'environment': 'roles/environment.md'
+    - 'firewalld': 'roles/firewalld.md'
+    - 'lvm': 'roles/lvm.md'
+    - 'ssh': 'roles/ssh.md'
+    - 'vhosts': 'roles/vhosts.md'
+    - 'wiki': 'roles/wiki.md'

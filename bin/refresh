@@ -1,0 +1,71 @@
+#!/bin/bash
+# vi: set sw=4 ts=4 ai:
+
+# Program  : refresh
+# Author   : Ton Kersten
+# Date     : 11-07-2018
+# Function : Gather all README.md files from all roles and create
+#            documentation
+
+#  Determine the program name and the "running directory"
+IAM="${0##*/}"
+CRD="$( [[ "$(printf "${0}" | cut -c 1 )" = "." ]] &&
+	{	printf "${PWD}/${0}"
+	} || {
+		printf "${0}"
+	})"
+CRD="${CRD%/*}"
+CUR="${PWD}"
+
+# Save the shell settings
+SETA=0; [[ ${-} = *a* ]] && SETA=1
+SETE=0; [[ ${-} = *e* ]] && SETE=1
+SETU=0; [[ ${-} = *u* ]] && SETU=1
+SETX=0; [[ ${-} = *x* ]] && SETX=1
+
+# Set and unset the needed shell settings
+set +o noclobber          # Overwrite existing files, if needed
+set -o nounset            # Do not allow uninitialized variables
+set +o errexit            # No returncode checking
+
+DOCDIR="${CRD}/../docs"
+ROLEDIR="${CRD}/../.."
+
+# Clean up configuration file
+sed -i '/_ROLES_START_/,$d' ${DOCDIR}/../mkdocs.yml
+echo "    # _ROLES_START_ Do not remove this line" >> ${DOCDIR}/../mkdocs.yml
+
+# Create the 'roles' directory
+mkdir -p ${DOCDIR}/roles/
+
+for role in ${ROLEDIR}/*
+do
+	# Only directories
+	[[ ! -d ${role} ]] && continue
+
+	# Name the role
+	rolename="$(basename "${role}")"
+
+	# Skip special roles (docs, setup and common)
+	[[ x"${rolename}" == x"docs"          ]] && continue
+	[[ x"${rolename}" == x"setup"         ]] && continue
+	[[ x"${rolename}" == x"common"        ]] && continue
+	[[ x"${rolename}" == x"presentation"  ]] && continue
+	[[ x"${rolename}" == x"vagrant"       ]] && continue
+	[[ x"${rolename}" == x"zones"         ]] && continue
+	[[ x"${rolename}" == x"nagios_config" ]] && continue
+
+	if [[ -f ${role}/README.md ]]
+	then
+		echo "Refreshing documenation for '${rolename}'" >&2
+		cat <<- @EOF >> ${DOCDIR}/../mkdocs.yml
+			    - '${rolename}': 'roles/${rolename}.md'
+		@EOF
+		cp -p ${role}/README.md ${DOCDIR}/roles/${rolename}.md
+	else
+		echo "No documenation found for '${rolename}'" >&2
+	fi
+done
+
+# That is all, folks!
+exit 0
