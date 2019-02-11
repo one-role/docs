@@ -32,7 +32,7 @@ server.
 ```bash
 cd /etc
 mv ansible ansible.original
-git clone https://ansiget:gettyget@git.example.net/ansible/setup.git ansible
+git clone https://github.com/one-role/setup.git ansible
 cd ansible
 ./refresh -f
 ```
