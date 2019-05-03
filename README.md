@@ -16,7 +16,7 @@ pip install mkdocs
 ## Generate
 
 Every Ansible role has the complete documentation in it's own `README.md` file
-and these `README.me` files are gathered with the `bin/refresh` script.
+and these `README.md` files are gathered with the `bin/refresh` script.
 
 This way the documentation is in the role and chances are it is kept up to date.
 
